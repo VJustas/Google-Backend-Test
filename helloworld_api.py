@@ -79,14 +79,14 @@ class HelloWorldApi(remote.Service):
             raise endpoints.NotFoundException('Greeting %s not found.' %
                                               (request.id,))
 
-        @endpoints.method(message_types.VoidMessage, Greeting,
+    @endpoints.method(message_types.VoidMessage, Greeting,
                   path='hellogreeting/authed', http_method='POST',
                   name='greetings.authed')
-        def greeting_authed(self, request):
-            current_user = endpoints.get_current_user()
-            email = (current_user.email() if current_user is not None
+    def greeting_authed(self, request):
+        current_user = endpoints.get_current_user()
+        email = (current_user.email() if current_user is not None
                      else 'Anonymous')
-            return Greeting(message='hello %s' % (email,))
+        return Greeting(message='hello %s' % (email,))
 
 
 
